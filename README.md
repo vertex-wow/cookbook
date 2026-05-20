@@ -1,7 +1,11 @@
-# cookbook
+# WoW Cookbook
 
-Worked examples for building World of Warcraft addons and tools. 
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
 
-Managed by the [Vertex WoW Community](https://github.com/vertex-wow) and [Vertex Industries](https://github.com/vertex-industries).
+Worked examples for building World of Warcraft addons and tools.
 
-Public-facing content lives in [docs/README.md](docs/README.md).
+Recipes are organized by topic.
+
+## Frames
+
+> Maintained by the [Vertex WoW Community](https://github.com/vertex-wow) and [Vertex Industries](https://github.com/vertex-industries).

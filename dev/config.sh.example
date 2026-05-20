@@ -1,0 +1,3 @@
+# Copy this to config.local.sh and update with your local paths
+WOW_DIR="/path/to/your/World of Warcraft/"
+WOW_ACCOUNT="youraccouontname"
