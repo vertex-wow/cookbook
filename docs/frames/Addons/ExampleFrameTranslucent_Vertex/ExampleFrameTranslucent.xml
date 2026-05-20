@@ -3,7 +3,7 @@
    xsi:schemaLocation="http://www.blizzard.com/wow/ui/
    https://raw.githubusercontent.com/Gethe/wow-ui-source/live/Interface/FrameXML/UI.xsd">
 
-  <Frame name="ExampleFrameTransparent" parent="UIParent"
+  <Frame name="ExampleFrameTranslucent" parent="UIParent"
          enableMouse="true"
          frameStrata="MEDIUM" hidden="true">
     <Size x="240" y="160"/>
@@ -18,7 +18,7 @@
       </Layer>
       <Layer level="ARTWORK">
         <FontString name="$parentTitle" inherits="GameFontNormal"
-                    text="Example Transparent Frame">
+                    text="Example Translucent Frame">
           <Anchors>
             <Anchor point="TOP" relativePoint="TOP" y="-16"/>
           </Anchors>

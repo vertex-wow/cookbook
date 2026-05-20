@@ -2,7 +2,7 @@
 
 XML frame recipes. No Lua, no logic — just the frame definitions.
 
-| <a href="#bare-frame"><img src="./assets/example_frame_bare.png" width="213"><br/>Bare</a> | <a href="#transparent-frame"><img src="./assets/example_frame_transparent.png" width="213"><br/>Transparent</a> | <a href="#tooltip-frame"><img src="./assets/example_frame_tooltip.png" width="213"><br/>Tooltip</a> |
+| <a href="#bare-frame"><img src="./assets/example_frame_bare.png" width="213"><br/>Bare</a> | <a href="#translucent-frame"><img src="./assets/example_frame_translucent.png" width="213"><br/>Translucent</a> | <a href="#tooltip-frame"><img src="./assets/example_frame_tooltip.png" width="213"><br/>Tooltip</a> |
 |:---:|:---:|:---:|
 
 ---
@@ -47,16 +47,16 @@ Install the addon in [Addons/ExampleFrameBare_Vertex](./Addons/ExampleFrameBare_
 
 ---
 
-## Transparent frame
+## Translucent frame
 
-A bare frame with a semi-transparent background. The game world is visible through it.
+A bare frame with a semi-translucent background. The game world is visible through it.
 
-![ExampleFrameTransparent in-game](./assets/example_frame_transparent.png)
+![ExampleFrameTranslucent in-game](./assets/example_frame_translucent.png)
 
 ### The frame
 
 ```xml
-<Frame name="ExampleFrameTransparent" parent="UIParent"
+<Frame name="ExampleFrameTranslucent" parent="UIParent"
        enableMouse="true"
        frameStrata="MEDIUM" hidden="true">
   <Size x="240" y="160"/>
@@ -71,7 +71,7 @@ A bare frame with a semi-transparent background. The game world is visible throu
     </Layer>
     <Layer level="ARTWORK">
       <FontString name="$parentTitle" inherits="GameFontNormal"
-                  text="Example Transparent Frame">
+                  text="Example Translucent Frame">
         <Anchors>
           <Anchor point="TOP" relativePoint="TOP" y="-16"/>
         </Anchors>
@@ -90,18 +90,18 @@ that strata.
 Common values from bottom to top: `BACKGROUND`, `LOW`, `MEDIUM`, `HIGH`,
 `DIALOG`, `FULLSCREEN`, `FULLSCREEN_DIALOG`, `TOOLTIP`.
 
-A transparent frame placed in the wrong strata can be obscured by other frames or,
+A translucent frame placed in the wrong strata can be obscured by other frames or,
 conversely, block UI elements it should sit behind.
 
 ### Live demo
 
-Install the addon in [Addons/ExampleFrameTransparent_Vertex](./Addons/ExampleFrameTransparent_Vertex/) and use `/ev2` to toggle the frame in-game.
+Install the addon in [Addons/ExampleFrameTranslucent_Vertex](./Addons/ExampleFrameTranslucent_Vertex/) and use `/ev2` to toggle the frame in-game.
 
 ---
 
 ## Tooltip frame
 
-A frame combining the rounded `NineSlicePanelTemplate` border with a semi-transparent background.
+A frame combining the rounded `NineSlicePanelTemplate` border with a semi-translucent background.
 
 ![ExampleFrameTooltip in-game](./assets/example_frame_tooltip.png)
 
@@ -166,7 +166,7 @@ BACKGROUND layer of the NineSlice child frame.
 
 **Background fill** — a plain `<Color>` texture placed inside the same NineSlice
 child frame at `textureSubLevel="1"`. Because higher sub-levels render in front,
-this covers the built-in center atlas and replaces it with a semi-transparent color.
+this covers the built-in center atlas and replaces it with a semi-translucent color.
 The 4px insets keep the fill inside the border edge.
 
 ### Live demo

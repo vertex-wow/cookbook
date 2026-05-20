@@ -1,8 +1,0 @@
-## Interface: 110205, 110207, 120000
-## Title: ExampleFrameTransparent 2026 by Vertex /ev2
-## Notes: Cookbook recipe — transparent frame with slash command /ev2 toggle.
-## Version: 1.0.0
-## Category: Development Tools
-
-ExampleFrameTransparent.xml
-_harness.lua
