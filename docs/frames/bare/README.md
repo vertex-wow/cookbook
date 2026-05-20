@@ -15,13 +15,24 @@ A minimal XML frame. No Lua, no logic — just the frame definition.
   <Anchors>
     <Anchor point="CENTER"/>
   </Anchors>
-  <Backdrop bgFile="Interface/DialogFrame/UI-DialogBox-Background"
-            edgeFile="Interface/DialogFrame/UI-DialogBox-Border"
-            tile="true">
-    <BackgroundInsets left="11" right="12" top="12" bottom="11"/>
-    <TileSize val="32"/>
-    <EdgeSize val="32"/>
-  </Backdrop>
+  <Frames>
+    <Frame inherits="NineSlicePanelTemplate" useParentLevel="true" setAllPoints="true">
+      <KeyValues>
+        <KeyValue key="layoutType" value="TooltipDefaultLayout" type="string"/>
+      </KeyValues>
+      <Layers>
+        <Layer level="BACKGROUND" textureSubLevel="1">
+          <Texture>
+            <Anchors>
+              <Anchor point="TOPLEFT" x="4" y="-4"/>
+              <Anchor point="BOTTOMRIGHT" x="-4" y="4"/>
+            </Anchors>
+            <Color r="0" g="0" b="0" a="0.8"/>
+          </Texture>
+        </Layer>
+      </Layers>
+    </Frame>
+  </Frames>
   <Layers>
     <Layer level="ARTWORK">
       <FontString name="$parentTitle" inherits="GameFontNormal"
@@ -44,6 +55,21 @@ A minimal XML frame. No Lua, no logic — just the frame definition.
 | `enableMouse="true"` | true | Required for drag/click |
 | `frameStrata` | `MEDIUM` | Renders above world, below UI chrome |
 
+## Background and border
+
+The old XML `<Backdrop>` element is defunct in retail WoW — it is silently ignored.
+The modern equivalent is two separate concerns:
+
+**Border** — a child `Frame` inheriting `NineSlicePanelTemplate`.
+`TooltipDefaultLayout` gives the rounded tooltip-style border (no title-bar overhang).
+The layout includes its own center fill atlas at `textureSubLevel="0"` in the
+BACKGROUND layer of the NineSlice child frame.
+
+**Background fill** — a plain `<Color>` texture placed inside the same NineSlice
+child frame at `textureSubLevel="1"`. Because higher sub-levels render in front,
+this covers the built-in center atlas and replaces it with a solid translucent color.
+The 4px insets keep the fill inside the border edge.
+
 ## Live demo
 
-Install the addon in [Addons/ExampleFrameBare_Vertex](./Addons/ExampleFrameBare_Vertex/) and use `/ev1` to toggle the frame in-game.
+Install the addon in [Addons/ExampleFrameBare_EV1_Vertex](./Addons/ExampleFrameBare_EV1_Vertex/) and use `/ev1` to toggle the frame in-game.

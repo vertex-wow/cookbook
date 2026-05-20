@@ -10,13 +10,24 @@
     <Anchors>
       <Anchor point="CENTER"/>
     </Anchors>
-    <Backdrop bgFile="Interface/DialogFrame/UI-DialogBox-Background"
-              edgeFile="Interface/DialogFrame/UI-DialogBox-Border"
-              tile="true">
-      <BackgroundInsets left="11" right="12" top="12" bottom="11"/>
-      <TileSize val="32"/>
-      <EdgeSize val="32"/>
-    </Backdrop>
+    <Frames>
+      <Frame inherits="NineSlicePanelTemplate" useParentLevel="true" setAllPoints="true">
+        <KeyValues>
+          <KeyValue key="layoutType" value="TooltipDefaultLayout" type="string"/>
+        </KeyValues>
+        <Layers>
+          <Layer level="BACKGROUND" textureSubLevel="1">
+            <Texture>
+              <Anchors>
+                <Anchor point="TOPLEFT" x="4" y="-4"/>
+                <Anchor point="BOTTOMRIGHT" x="-4" y="4"/>
+              </Anchors>
+              <Color r="0" g="0" b="0" a="0.8"/>
+            </Texture>
+          </Layer>
+        </Layers>
+      </Frame>
+    </Frames>
     <Layers>
       <Layer level="ARTWORK">
         <FontString name="$parentTitle" inherits="GameFontNormal"
