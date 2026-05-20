@@ -1,8 +1,0 @@
-## Interface: 110205, 110207, 120000
-## Title: ExampleFrameBare 2026 by Vertex
-## Notes: Cookbook recipe — bare frame with slash command /ev1 toggle.
-## Version: 1.0.0
-## Category: Development Tools
-
-ExampleFrameBare.xml
-_harness.lua

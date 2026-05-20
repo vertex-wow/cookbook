@@ -31,7 +31,7 @@
     <Layers>
       <Layer level="ARTWORK">
         <FontString name="$parentTitle" inherits="GameFontNormal"
-                    text="Example Frame">
+                    text="Example Tooltip Frame">
           <Anchors>
             <Anchor point="TOP" relativePoint="TOP" y="-16"/>
           </Anchors>
