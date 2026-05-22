@@ -43,7 +43,7 @@ A minimal frame with a solid background and no border.
 
 ### Live demo
 
-Install the addon in [Addons/ExampleFrameBare___Vertex](./Addons/ExampleFrameBare___Vertex/) and use `/ev1` to toggle the frame in-game.
+Install the addon in [Addons/ExampleFrameBare__Vertex](./Addons/ExampleFrameBare__Vertex/) and use `/ev1` to toggle the frame in-game.
 
 ---
 
@@ -185,24 +185,13 @@ A frame using `PortraitFrameTemplate` with a custom icon texture as the portrait
 
 ```xml
 <Frame name="ExampleFrameIconPortrait" parent="UIParent"
-       toplevel="true" enableMouse="true" movable="true"
+       toplevel="true" enableMouse="true"
        frameStrata="MEDIUM" hidden="true"
        inherits="PortraitFrameTemplate">
   <Size x="380" y="260"/>
   <Anchors>
     <Anchor point="CENTER"/>
   </Anchors>
-  <Scripts>
-    <OnLoad>
-      self:RegisterForDrag("LeftButton")
-    </OnLoad>
-    <OnDragStart>
-      self:StartMoving()
-    </OnDragStart>
-    <OnDragStop>
-      self:StopMovingOrSizing()
-    </OnDragStop>
-  </Scripts>
 </Frame>
 ```
 
@@ -215,11 +204,8 @@ all accessible as named children on the frame:
 | Key | Type | Purpose |
 |---|---|---|
 | `frame.TitleText` | FontString | Title label in the header bar |
-| `frame.Portrait` | Texture | Circular portrait image in the top-left |
+| `frame.PortraitContainer.portrait` | Texture | Circular portrait image in the top-left |
 | `frame.CloseButton` | Button | Hides the frame when clicked |
-
-The template does not register the frame for dragging — that is done explicitly in
-`OnLoad` and the `OnDragStart` / `OnDragStop` scripts above.
 
 ### Populating the portrait
 
@@ -229,6 +215,7 @@ the Lua file runs at addon load time:
 ```lua
 ExampleFrameIconPortrait:SetTitle("Example Icon Portrait")
 ExampleFrameIconPortrait:SetPortraitToAsset("Interface\\AddOns\\ExampleFrameIconPortrait__Vertex\\vertex-icon")
+ExampleFrameIconPortrait:GetPortrait():SetTexCoord(0, 1, 1, 0)
 ExampleFrameIconPortrait:SetPortraitTextureSizeAndOffset(64, -6, 10)
 ```
 
@@ -240,7 +227,7 @@ within the circular portrait area.
 To show a unit portrait instead (player's class icon, race, etc.):
 
 ```lua
-SetPortraitTexture(ExampleFrameIconPortrait.Portrait, "player")
+SetPortraitTexture(ExampleFrameIconPortrait:GetPortrait(), "player")
 ```
 
 ### Live demo
