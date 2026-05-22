@@ -1,8 +1,0 @@
-## Interface: 110205, 110207, 120000
-## Title: ExampleFrameModelPortrait 2026 by Vertex /ev5
-## Notes: Cookbook recipe — model portrait frame with slash command /ev5 toggle.
-## Version: 1.0.0
-## Category: Development Tools
-
-ExampleFrameModelPortrait.xml
-_harness.lua

@@ -4,22 +4,13 @@
    https://raw.githubusercontent.com/Gethe/wow-ui-source/live/Interface/FrameXML/UI.xsd">
 
   <Frame name="ExampleFrameModelPortrait" parent="UIParent"
-         enableMouse="true"
-         frameStrata="MEDIUM" hidden="true">
-    <Size x="240" y="240"/>
+         toplevel="true" enableMouse="true"
+         frameStrata="MEDIUM" hidden="true"
+         inherits="PortraitFrameTemplate">
+    <Size x="380" y="260"/>
     <Anchors>
       <Anchor point="CENTER"/>
     </Anchors>
-    <Layers>
-      <Layer level="BACKGROUND">
-        <Texture setAllPoints="true">
-          <Color r="0" g="0" b="0" a="1"/>
-        </Texture>
-      </Layer>
-    </Layers>
-    <Frames>
-      <DressUpModel parentKey="Model" setAllPoints="true"/>
-    </Frames>
   </Frame>
 
 </Ui>

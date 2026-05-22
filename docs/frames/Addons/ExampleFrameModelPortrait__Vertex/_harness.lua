@@ -10,8 +10,6 @@ SlashCmdList["EXAMPLEFRAMEMODELPORTRAIT"] = function()
     if f:IsShown() then
         f:Hide()
     else
-        f.Model:SetUnit("player")
-        f.Model:SetCamera(0)
         f:Show()
     end
 end

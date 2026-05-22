@@ -1,9 +1,0 @@
-## Interface: 110205, 110207, 120000
-## Title: ExampleFrameIconPortrait 2026 by Vertex /ev4
-## Notes: Cookbook recipe — icon portrait frame with slash command /ev4 toggle.
-## Version: 1.0.0
-## Category: Development Tools
-
-ExampleFrameIconPortrait.xml
-ExampleFrameIconPortrait.lua
-_harness.lua

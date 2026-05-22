@@ -5,4 +5,5 @@
 ## Category: Development Tools
 
 ExampleFrameModelPortrait.xml
+ExampleFrameModelPortrait.lua
 _harness.lua

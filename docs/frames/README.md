@@ -285,7 +285,8 @@ Install the addon in [Addons/ExampleFrameIconPortrait__Vertex](./Addons/ExampleF
 
 ## Model portrait
 
-A frame containing a `DressUpModel` widget that renders the player's 3D character.
+A frame using `PortraitFrameTemplate` with the player's face rendered into the
+portrait slot via `SetPortraitToUnit`.
 
 ![ExampleFrameModelPortrait in-game](./assets/example_frame_model_portrait.png)
 
@@ -293,47 +294,34 @@ A frame containing a `DressUpModel` widget that renders the player's 3D characte
 
 ```xml
 <Frame name="ExampleFrameModelPortrait" parent="UIParent"
-       enableMouse="true"
-       frameStrata="MEDIUM" hidden="true">
-  <Size x="240" y="240"/>
+       toplevel="true" enableMouse="true"
+       frameStrata="MEDIUM" hidden="true"
+       inherits="PortraitFrameTemplate">
+  <Size x="380" y="260"/>
   <Anchors>
     <Anchor point="CENTER"/>
   </Anchors>
-  <Layers>
-    <Layer level="BACKGROUND">
-      <Texture setAllPoints="true">
-        <Color r="0" g="0" b="0" a="1"/>
-      </Texture>
-    </Layer>
-  </Layers>
-  <Frames>
-    <DressUpModel parentKey="Model" setAllPoints="true"/>
-  </Frames>
 </Frame>
 ```
 
-### DressUpModel vs PlayerModel
+### Populating the portrait
 
-Both are 3D model widget types, but they behave differently:
-
-**`PlayerModel`** tracks the live character in the world — camera and position are
-coupled to the player's in-game location, which produces inconsistent framing in
-a UI panel.
-
-**`DressUpModel`** (used by the Character pane and Auction House try-on) is decoupled
-from the world. It displays the character's current appearance in a fixed viewport,
-which is what you want for a portrait. Unit is assigned in Lua — `unit="player"` is
-not a valid XML attribute and silently does nothing.
-
-The harness calls two functions at show-time:
+`SetPortraitToUnit` renders the unit's face into the portrait texture and respects
+the circular mask. Call it in an `OnShow` handler so the portrait refreshes each
+time the frame opens — the same pattern used by `AuctionHouseFrame`, `BankFrame`,
+and `TradeFrame`:
 
 ```lua
-f.Model:SetUnit("player")   -- load the player's appearance
-f.Model:SetCamera(0)        -- full-body portrait camera
+ExampleFrameModelPortrait:SetTitle("Example Model Portrait")
+ExampleFrameModelPortrait:SetScript("OnShow", function(self)
+    self:SetPortraitToUnit("player")
+end)
 ```
 
-`parentKey="Model"` makes the child accessible as `frame.Model` from Lua.
+This is identical in structure to the [Icon portrait](#icon-portrait) recipe —
+the only difference is the portrait source: `SetPortraitToUnit` instead of
+`SetPortraitToAsset`.
 
 ### Live demo
 
-Install the addon in [Addons/ExampleFrameModelPortrait__Vertex](./Addons/ExampleFrameModelPortrait__Vertex/) and use `/ev6` to toggle the frame in-game. The harness calls `SetUnit` and `SetCamera` each time the frame is shown.
+Install the addon in [Addons/ExampleFrameModelPortrait__Vertex](./Addons/ExampleFrameModelPortrait__Vertex/) and use `/ev6` to toggle the frame in-game.
