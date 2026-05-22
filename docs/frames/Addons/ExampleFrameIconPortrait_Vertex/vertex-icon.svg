@@ -1,0 +1,7 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <title>Vertex Industries</title>
+  <desc>A geometric letter V with a horizontal crossbar.</desc>
+  <rect width="512" height="512" fill="#1F2937"/>
+  <polygon points="89.6,128 192,128 256,358.4 320,128 422.4,128 307.2,435.2 204.8,435.2" fill="#FCD34D"/>
+  <rect x="153.6" y="294.4" width="204.8" height="15.4" fill="#1F2937"/>
+</svg>
