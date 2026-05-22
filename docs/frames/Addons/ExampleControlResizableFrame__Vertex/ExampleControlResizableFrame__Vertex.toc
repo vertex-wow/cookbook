@@ -1,0 +1,9 @@
+## Interface: 110205, 110207, 120000
+## Title: ExampleControlResizableFrame 2026 by Vertex /ev10
+## Notes: Cookbook recipe — resizable frame, slash command /ev10 toggle.
+## Version: 1.0.0
+## Category: Development Tools
+
+ExampleControlResizableFrame.xml
+ExampleControlResizableFrame.lua
+_harness.lua

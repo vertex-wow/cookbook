@@ -1,6 +1,6 @@
 ## Interface: 110205, 110207, 120000
-## Title: ExampleControlBottomTabs 2026 by Vertex /ev10
-## Notes: Cookbook recipe — bottom tabs control, slash command /ev10 toggle.
+## Title: ExampleControlBottomTabs 2026 by Vertex /ev11
+## Notes: Cookbook recipe — bottom tabs control, slash command /ev11 toggle.
 ## Version: 1.0.0
 ## Category: Development Tools
 

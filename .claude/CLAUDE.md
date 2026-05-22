@@ -32,3 +32,4 @@ Each addon lives in `docs/frames/Addons/<AddonName>__Vertex/` and contains:
   - `README.md` (root) — lists individual recipes by name; add a bullet if adding a new top-level recipe, skip for sub-sections or controls
 - **Live demo added → update `docs/demos.md`.** Any new `_harness.lua` in any `Addons/` subdirectory means a new row in the demos table. Assign the next available `/ev#` slot.
 - **Demo renumbered → update both.** If a demo's `/ev#` changes, update the `_harness.lua` AND the corresponding row in `docs/demos.md` together.
+- **Addon created or modified → run `dev/install.sh`.** After any change to files inside an `Addons/` directory (new addon or edit to existing), run `dev/install.sh` to deploy to the local WoW AddOns directory.

@@ -456,6 +456,46 @@ Install the addon in [Addons/ExampleControlMoveableFrame__Vertex](./Addons/Examp
 
 ---
 
+### Resizable frame
+
+Adding a resize handle to a [Title frame](#title-frame). Two additions — `resizable="true"` on the frame and a `PanelResizeButtonTemplate` child button at the bottom-right corner.
+
+**XML** — `resizable="true"` on the `<Frame>` element and a button child with explicit mouse scripts:
+
+```xml
+<Frame name="ExampleControlResizableFrame" ...
+       resizable="true">
+  ...
+  <Frames>
+    <Button inherits="PanelResizeButtonTemplate">
+      <Anchors>
+        <Anchor point="BOTTOMRIGHT" x="-6" y="6"/>
+      </Anchors>
+      <Scripts>
+        <OnEnter></OnEnter>
+        <OnLeave></OnLeave>
+        <OnMouseDown>self:GetParent():StartSizing("BOTTOMRIGHT")</OnMouseDown>
+        <OnMouseUp>self:GetParent():StopMovingOrSizing()</OnMouseUp>
+      </Scripts>
+    </Button>
+  </Frames>
+</Frame>
+```
+
+**Lua** — set minimum size:
+
+```lua
+ExampleControlResizableFrame:SetResizeBounds(200, 150)
+```
+
+`PanelResizeButtonTemplate` provides the grip art. Its built-in scripts are not used — explicit `OnMouseDown`/`OnMouseUp` handlers call `StartSizing` and `StopMovingOrSizing` directly on the parent. The empty `OnEnter`/`OnLeave` overrides suppress the cursor change that the template's default handlers apply. `SetResizeBounds` clamps how small the frame can be dragged.
+
+### Live demo
+
+Install the addon in [Addons/ExampleControlResizableFrame__Vertex](./Addons/ExampleControlResizableFrame__Vertex/) and use `/ev10` to toggle the frame in-game.
+
+---
+
 ### Bottom tabs
 
 Adding `PanelTabButtonTemplate` tabs to a [Title Frame](#title-frame). Three tabs switch between three content panels.
@@ -557,6 +597,6 @@ end
 
 ### Live demo
 
-Install the addon in [Addons/ExampleControlBottomTabs__Vertex](./Addons/ExampleControlBottomTabs__Vertex/) and use `/ev10` to toggle the frame in-game.
+Install the addon in [Addons/ExampleControlBottomTabs__Vertex](./Addons/ExampleControlBottomTabs__Vertex/) and use `/ev11` to toggle the frame in-game.
 
 > Maintained by the [Vertex WoW Community](https://github.com/vertex-wow) and [Vertex Industries](https://github.com/vertex-industries).

@@ -17,6 +17,7 @@ All demos support drag-to-move and have a close button as a harness convenience 
 | 7 | `/ev7` | `ExampleFrameModelPortrait__Vertex` | [Model portrait](frames/README.md#model-portrait) |
 | 8 | `/ev8` | `ExampleControlCloseButton__Vertex` | [Close button](frames/README.md#close-button) |
 | 9 | `/ev9` | `ExampleControlMoveableFrame__Vertex` | [Moveable frame](frames/README.md#moveable--draggable-frame) |
-| 10 | `/ev10` | `ExampleControlBottomTabs__Vertex` | [Bottom tabs](frames/README.md#bottom-tabs) |
+| 10 | `/ev10` | `ExampleControlResizableFrame__Vertex` | [Resizable frame](frames/README.md#resizable-frame) |
+| 11 | `/ev11` | `ExampleControlBottomTabs__Vertex` | [Bottom tabs](frames/README.md#bottom-tabs) |
 
 > Maintained by the [Vertex WoW Community](https://github.com/vertex-wow) and [Vertex Industries](https://github.com/vertex-industries).

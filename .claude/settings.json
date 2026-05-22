@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(bash dev/install.sh)",
-      "Bash(bash dev/assets.sh)"
+      "Bash(bash dev/assets.sh)",
+      "Bash(dev/install.sh)"
     ]
   }
 }

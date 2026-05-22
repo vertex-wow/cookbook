@@ -1,0 +1,30 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+   https://raw.githubusercontent.com/Gethe/wow-ui-source/live/Interface/FrameXML/UI.xsd">
+
+  <Frame name="ExampleControlResizableFrame" parent="UIParent"
+         toplevel="true" enableMouse="true"
+         resizable="true"
+         frameStrata="MEDIUM" hidden="true"
+         inherits="DefaultPanelTemplate">
+    <Size x="380" y="260"/>
+    <Anchors>
+      <Anchor point="CENTER"/>
+    </Anchors>
+    <Frames>
+      <Button inherits="PanelResizeButtonTemplate">
+        <Anchors>
+          <Anchor point="BOTTOMRIGHT" x="-6" y="6"/>
+        </Anchors>
+        <Scripts>
+          <OnEnter></OnEnter>
+          <OnLeave></OnLeave>
+          <OnMouseDown>self:GetParent():StartSizing("BOTTOMRIGHT")</OnMouseDown>
+          <OnMouseUp>self:GetParent():StopMovingOrSizing()</OnMouseUp>
+        </Scripts>
+      </Button>
+    </Frames>
+  </Frame>
+
+</Ui>

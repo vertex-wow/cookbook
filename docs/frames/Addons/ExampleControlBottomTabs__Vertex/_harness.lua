@@ -1,4 +1,4 @@
--- HARNESS: Not part of the recipe. Registers /ev10 so you can toggle the frame
+-- HARNESS: Not part of the recipe. Registers /ev11 so you can toggle the frame
 -- in-game to see the example. Safe to delete when building your own addon.
 
 VertexExamples = VertexExamples or {}
@@ -13,7 +13,7 @@ ExampleControlBottomTabs:SetScript("OnDragStart", function(self) self:StartMovin
 ExampleControlBottomTabs:SetScript("OnDragStop", function(self) self:StopMovingOrSizing() end)
 CreateFrame("Button", nil, ExampleControlBottomTabs, "UIPanelCloseButtonDefaultAnchors")
 
-SLASH_EXAMPLECONTROLBOTTOMTABS1 = "/ev10"
+SLASH_EXAMPLECONTROLBOTTOMTABS1 = "/ev11"
 SlashCmdList["EXAMPLECONTROLBOTTOMTABS"] = function()
     local f = ExampleControlBottomTabs
     if f:IsShown() then
