@@ -11,6 +11,7 @@ Also see [Frame Controls](#controls) section:
 - [Moveable frame](#moveable-frame)
 - [Resizable frame](#resizable-frame)
 - [Bottom tabs](#bottom-tabs)
+- [Right tabs](#right-tabs)
 
 > **Live demo convenience:** Every live demo harness adds drag-to-move and a close button (where the recipe does not already provide them) so you can tile frames and dismiss them without the slash command. These are in the `-- QoL (harness only)` block in each `_harness.lua` and are not part of the recipe.
 
@@ -598,5 +599,99 @@ end
 ### Live demo
 
 Install the addon in [Addons/ExampleControlBottomTabs__Vertex](./Addons/ExampleControlBottomTabs__Vertex/) and use `/ev11` to toggle the frame in-game.
+
+---
+
+### Right tabs
+
+Adding `LargeSideTabButtonTemplate` icon tabs to a [Title Frame](#title-frame). Three tabs with icons appear stacked vertically on the right side of the frame, outside its border. Clicking a tab switches between three content panels and shows a tooltip on hover.
+
+Because the frame mixin references the global `ExampleControlRightTabsFrameMixin`, **the Lua file must be listed before the XML in the TOC**.
+
+**XML** — a virtual tab template inheriting `LargeSideTabButtonTemplate` with `parentArray="TabButtons"`, then one `<Frame>` per tab and one content `<Frame>` per panel. The first tab anchors `TOPLEFT` to the frame's `TOPRIGHT`; each subsequent tab chains `TOP` off the previous tab's `BOTTOM`:
+
+```xml
+<Frame name="ExampleControlRightTabsTabTemplate"
+       inherits="LargeSideTabButtonTemplate"
+       parentArray="TabButtons"
+       virtual="true"/>
+
+<Frame name="ExampleControlRightTabs" ...
+       inherits="DefaultPanelTemplate"
+       mixin="ExampleControlRightTabsFrameMixin">
+  <Frames>
+    <Frame name="$parentAlphaTab" parentKey="AlphaTab"
+           inherits="ExampleControlRightTabsTabTemplate">
+      <KeyValues>
+        <KeyValue key="frameName"     value="AlphaPanel"                       type="string"/>
+        <KeyValue key="tooltipText"   value="Alpha"                            type="string"/>
+        <KeyValue key="activeAtlas"   value="questlog-tab-icon-quest"          type="string"/>
+        <KeyValue key="inactiveAtlas" value="questlog-tab-icon-quest-inactive" type="string"/>
+      </KeyValues>
+      <Anchors>
+        <Anchor point="TOPLEFT" relativePoint="TOPRIGHT" x="3" y="-28"/>
+      </Anchors>
+    </Frame>
+    <Frame name="$parentBetaTab" parentKey="BetaTab"
+           inherits="ExampleControlRightTabsTabTemplate">
+      ...
+      <Anchors>
+        <Anchor point="TOP" relativeKey="$parent.AlphaTab" relativePoint="BOTTOM" x="0" y="-3"/>
+      </Anchors>
+    </Frame>
+    ...
+  </Frames>
+  <Scripts>
+    <OnLoad method="OnLoad"/>
+    <OnShow method="OnShow"/>
+  </Scripts>
+</Frame>
+```
+
+**Lua**:
+
+```lua
+local TAB_PANELS = { "AlphaPanel", "BetaPanel", "GammaPanel" }
+
+ExampleControlRightTabsFrameMixin = {}
+
+function ExampleControlRightTabsFrameMixin:OnLoad()
+    self:SetTitle("Example Right Tabs")
+    for _, tab in ipairs(self.TabButtons) do
+        tab:SetCustomOnMouseUpHandler(function(self, button, upInside)
+            if upInside and button == "LeftButton" then
+                CallMethodOnNearestAncestor(self, "SelectTab", self.frameName)
+            end
+        end)
+    end
+end
+
+function ExampleControlRightTabsFrameMixin:OnShow()
+    self:SelectTab("AlphaPanel")
+end
+
+function ExampleControlRightTabsFrameMixin:SelectTab(frameName)
+    for _, panelKey in ipairs(TAB_PANELS) do
+        self[panelKey]:SetShown(panelKey == frameName)
+    end
+    for _, tab in ipairs(self.TabButtons) do
+        tab:SetChecked(tab.frameName == frameName)
+    end
+end
+```
+
+| | |
+|---|---|
+| `LargeSideTabButtonTemplate` | 43×55 frame with `questlog-tab-side` background art, icon slot, selected glow, and hover glow; provides `SidePanelTabButtonMixin` for mouse handling and tooltips |
+| `parentArray="TabButtons"` | Each instantiated tab is automatically appended to `parent.TabButtons`; the frame mixin iterates this array rather than naming tabs individually |
+| `activeAtlas` / `inactiveAtlas` | KeyValues read by `SidePanelTabButtonMixin:SetChecked` to swap the icon atlas between selected and deselected states |
+| `tooltipText` | KeyValue read by `SidePanelTabButtonMixin:OnEnter` to show a tooltip anchored to the right of the tab |
+| `SetCustomOnMouseUpHandler` | Hook provided by `SidePanelTabButtonMixin`; the handler runs after the built-in sound and icon-nudge, so both visual feedback and navigation fire on the same click |
+| `CallMethodOnNearestAncestor` | Walks the parent chain to call `SelectTab` — the tab button needs no direct reference to the outer frame |
+| `SetChecked` | Sets `activeAtlas` or `inactiveAtlas` on the Icon texture and shows/hides the `SelectedTexture` glow overlay |
+
+### Live demo
+
+Install the addon in [Addons/ExampleControlRightTabs__Vertex](./Addons/ExampleControlRightTabs__Vertex/) and use `/ev12` to toggle the frame in-game.
 
 > Maintained by the [Vertex WoW Community](https://github.com/vertex-wow) and [Vertex Industries](https://github.com/vertex-industries).

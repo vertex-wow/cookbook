@@ -19,5 +19,6 @@ All demos support drag-to-move and have a close button as a harness convenience 
 | 9 | `/ev9` | `ExampleControlMoveableFrame__Vertex` | [Moveable frame](frames/README.md#moveable--draggable-frame) |
 | 10 | `/ev10` | `ExampleControlResizableFrame__Vertex` | [Resizable frame](frames/README.md#resizable-frame) |
 | 11 | `/ev11` | `ExampleControlBottomTabs__Vertex` | [Bottom tabs](frames/README.md#bottom-tabs) |
+| 12 | `/ev12` | `ExampleControlRightTabs__Vertex` | [Right tabs](frames/README.md#right-tabs) |
 
 > Maintained by the [Vertex WoW Community](https://github.com/vertex-wow) and [Vertex Industries](https://github.com/vertex-industries).
