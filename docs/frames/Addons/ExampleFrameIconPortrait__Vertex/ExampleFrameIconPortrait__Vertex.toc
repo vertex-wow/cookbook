@@ -1,6 +1,6 @@
 ## Interface: 110205, 110207, 120000
-## Title: ExampleFrameIconPortrait 2026 by Vertex /ev4
-## Notes: Cookbook recipe — icon portrait frame with slash command /ev4 toggle.
+## Title: ExampleFrameIconPortrait 2026 by Vertex /ev5
+## Notes: Cookbook recipe — icon portrait frame with slash command /ev5 toggle.
 ## Version: 1.0.0
 ## Category: Development Tools
 

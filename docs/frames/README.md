@@ -2,8 +2,8 @@
 
 XML frame recipes. No Lua, no logic — just the frame definitions.
 
-| <a href="#bare-frame"><img src="./assets/example_frame_bare.png" width="140"><br/>Bare</a> | <a href="#translucent-frame"><img src="./assets/example_frame_translucent.png" width="140"><br/>Translucent</a> | <a href="#tooltip-frame"><img src="./assets/example_frame_tooltip.png" width="140"><br/>Tooltip</a> | <a href="#icon-portrait"><img src="./assets/example_frame_icon_portrait.png" width="140"><br/>Icon Portrait</a> | <a href="#model-portrait"><img src="./assets/example_frame_model_portrait.png" width="140"><br/>Model Portrait</a> |
-|:---:|:---:|:---:|:---:|:---:|
+| <a href="#bare-frame"><img src="./assets/example_frame_bare.png" width="140"><br/>Bare</a> | <a href="#translucent-frame"><img src="./assets/example_frame_translucent.png" width="140"><br/>Translucent</a> | <a href="#tooltip-frame"><img src="./assets/example_frame_tooltip.png" width="140"><br/>Tooltip</a> | <a href="#title-frame"><img src="./assets/example_frame_title.png" width="140"><br/>Title</a> | <a href="#icon-portrait"><img src="./assets/example_frame_icon_portrait.png" width="140"><br/>Icon Portrait</a> | <a href="#model-portrait"><img src="./assets/example_frame_model_portrait.png" width="140"><br/>Model Portrait</a> |
+|:---:|:---:|:---:|:---:|:---:|:---:|
 
 ---
 
@@ -175,6 +175,53 @@ Install the addon in [Addons/ExampleFrameTooltip__Vertex](./Addons/ExampleFrameT
 
 ---
 
+## Title frame
+
+A frame using `DefaultPanelTemplate` — standard WoW panel chrome with a title bar and no portrait slot.
+
+![ExampleFrameTitleFrame in-game](./assets/example_frame_title.png)
+
+### The frame
+
+```xml
+<Frame name="ExampleFrameTitleFrame" parent="UIParent"
+       toplevel="true" enableMouse="true"
+       frameStrata="MEDIUM" hidden="true"
+       inherits="DefaultPanelTemplate">
+  <Size x="380" y="260"/>
+  <Anchors>
+    <Anchor point="CENTER"/>
+  </Anchors>
+</Frame>
+```
+
+### Setting the title
+
+The template applies `DefaultPanelMixin` (which extends `TitledPanelMixin`) to the frame, exposing a `SetTitle` method:
+
+```lua
+ExampleFrameTitleFrame:SetTitle("Example Title Frame")
+```
+
+`SetTitle` writes directly to `self.TitleContainer.TitleText`, the `FontString` embedded in the title bar by the template. Setting it in the Lua file (loaded after the XML) is the canonical pattern — the template leaves the text empty so the caller controls it.
+
+### What DefaultPanelTemplate provides
+
+`DefaultPanelTemplate` is a Blizzard-supplied virtual frame built on `DefaultPanelBaseTemplate`:
+
+| Key | Type | Purpose |
+|---|---|---|
+| `frame.TitleContainer.TitleText` | FontString | Title label in the header bar |
+| `frame.NineSlice` | Frame | `ButtonFrameTemplateNoPortrait` nine-slice border |
+
+The nine-slice layout (`ButtonFrameTemplateNoPortrait`) gives the standard metal WoW panel chrome without a portrait cutout in the top-left corner. There is no built-in close button — dismiss the frame programmatically or add your own.
+
+### Live demo
+
+Install the addon in [Addons/ExampleFrameTitleFrame__Vertex](./Addons/ExampleFrameTitleFrame__Vertex/) and use `/ev4` to toggle the frame in-game.
+
+---
+
 ## Icon portrait
 
 A frame using `PortraitFrameTemplate` with a custom icon texture as the portrait.
@@ -232,7 +279,7 @@ SetPortraitTexture(ExampleFrameIconPortrait:GetPortrait(), "player")
 
 ### Live demo
 
-Install the addon in [Addons/ExampleFrameIconPortrait__Vertex](./Addons/ExampleFrameIconPortrait__Vertex/) and use `/ev4` to toggle the frame in-game. The addon includes `vertex-icon.png` as the example portrait texture.
+Install the addon in [Addons/ExampleFrameIconPortrait__Vertex](./Addons/ExampleFrameIconPortrait__Vertex/) and use `/ev5` to toggle the frame in-game. The addon includes `vertex-icon.png` as the example portrait texture.
 
 ---
 
@@ -289,4 +336,4 @@ f.Model:SetCamera(0)        -- full-body portrait camera
 
 ### Live demo
 
-Install the addon in [Addons/ExampleFrameModelPortrait__Vertex](./Addons/ExampleFrameModelPortrait__Vertex/) and use `/ev5` to toggle the frame in-game. The harness calls `SetUnit` and `SetCamera` each time the frame is shown.
+Install the addon in [Addons/ExampleFrameModelPortrait__Vertex](./Addons/ExampleFrameModelPortrait__Vertex/) and use `/ev6` to toggle the frame in-game. The harness calls `SetUnit` and `SetCamera` each time the frame is shown.
