@@ -45,3 +45,6 @@ coverage/
 *.bak
 *.orig
 *.tmp
+
+# AI
+!.claude/

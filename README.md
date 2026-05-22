@@ -11,5 +11,7 @@ Recipes are organized by topic.
 - [Bare frame](docs/frames/README.md#bare-frame) — solid background, no border
 - [Translucent frame](docs/frames/README.md#translucent-frame) — semi-translucent background, game world visible through it
 - [Tooltip frame](docs/frames/README.md#tooltip-frame) — rounded `NineSlicePanelTemplate` border with translucent background
+- [Icon portrait](docs/frames/README.md#icon-portrait) — 2D atlas icon as a portrait texture
+- [Model portrait](docs/frames/README.md#model-portrait) — `PlayerModel` widget rendering the player's 3D character
 
 > Maintained by the [Vertex WoW Community](https://github.com/vertex-wow) and [Vertex Industries](https://github.com/vertex-industries).
