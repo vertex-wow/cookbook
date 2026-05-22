@@ -1,12 +1,12 @@
--- HARNESS: Not part of the recipe. Registers /ev6 so you can toggle the frame
+-- HARNESS: Not part of the recipe. Registers /ev4 so you can toggle the frame
 -- in-game to see the example. Safe to delete when building your own addon.
 
 VertexExamples = VertexExamples or {}
-VertexExamples.ExampleFrameIconPortrait = ExampleFrameIconPortrait
+VertexExamples.ExampleFrameModalDialog = ExampleFrameModalDialog
 
-SLASH_EXAMPLEFRAMEICONPORTRAIT1 = "/ev6"
-SlashCmdList["EXAMPLEFRAMEICONPORTRAIT"] = function()
-    local f = ExampleFrameIconPortrait
+SLASH_EXAMPLEFRAMEMODALDIALOG1 = "/ev4"
+SlashCmdList["EXAMPLEFRAMEMODALDIALOG"] = function()
+    local f = ExampleFrameModalDialog
     if f:IsShown() then
         f:Hide()
     else

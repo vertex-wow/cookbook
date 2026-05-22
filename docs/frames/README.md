@@ -2,8 +2,8 @@
 
 XML frame recipes. No Lua, no logic — just the frame definitions.
 
-| <a href="#bare-frame"><img src="./assets/example_frame_bare.png" width="140"><br/>Bare</a> | <a href="#translucent-frame"><img src="./assets/example_frame_translucent.png" width="140"><br/>Translucent</a> | <a href="#tooltip-frame"><img src="./assets/example_frame_tooltip.png" width="140"><br/>Tooltip</a> | <a href="#title-frame"><img src="./assets/example_frame_title.png" width="140"><br/>Title</a> | <a href="#icon-portrait"><img src="./assets/example_frame_icon_portrait.png" width="140"><br/>Icon Portrait</a> | <a href="#model-portrait"><img src="./assets/example_frame_model_portrait.png" width="140"><br/>Model Portrait</a> |
-|:---:|:---:|:---:|:---:|:---:|:---:|
+| <a href="#bare-frame"><img src="./assets/example_frame_bare.png" width="140"><br/>Bare</a> | <a href="#translucent-frame"><img src="./assets/example_frame_translucent.png" width="140"><br/>Translucent</a> | <a href="#tooltip-frame"><img src="./assets/example_frame_tooltip.png" width="140"><br/>Tooltip</a> | <a href="#modal-dialog"><img src="./assets/example_frame_modal_dialog.png" width="140"><br/>Modal Dialog</a> | <a href="#title-frame"><img src="./assets/example_frame_title.png" width="140"><br/>Title</a> | <a href="#icon-portrait"><img src="./assets/example_frame_icon_portrait.png" width="140"><br/>Icon Portrait</a> | <a href="#model-portrait"><img src="./assets/example_frame_model_portrait.png" width="140"><br/>Model Portrait</a> |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 
 ---
 
@@ -175,6 +175,70 @@ Install the addon in [Addons/ExampleFrameTooltip__Vertex](./Addons/ExampleFrameT
 
 ---
 
+## Modal dialog
+
+A frame using `DialogBorderTemplate` — the same diamond-metal border and tiled parchment background used by the ESC game menu.
+
+![ExampleFrameModalDialog in-game](./assets/example_frame_modal_dialog.png)
+
+### The frame
+
+```xml
+<Frame name="ExampleFrameModalDialog" parent="UIParent"
+       toplevel="true" enableMouse="true"
+       frameStrata="DIALOG" hidden="true">
+  <Size x="240" y="160"/>
+  <Anchors>
+    <Anchor point="CENTER"/>
+  </Anchors>
+  <Frames>
+    <Frame inherits="DialogBorderTemplate" useParentLevel="true" setAllPoints="true"/>
+  </Frames>
+</Frame>
+```
+
+### Key attributes
+
+| Attribute | Value | Why |
+|---|---|---|
+| `frameStrata` | `DIALOG` | Renders above all normal UI frames; the strata WoW uses for popup windows that demand attention |
+| `toplevel="true"` | true | Receives keyboard input independently from its parent |
+| `enableMouse="true"` | true | Blocks mouse clicks from passing through to the game world |
+| `inherits` | `DialogBorderTemplate` | Diamond-metal nine-slice border with tiled parchment background |
+
+### What DialogBorderTemplate provides
+
+`DialogBorderTemplate` is a virtual frame built on `NineSlicePanelTemplate`:
+
+| Key | Type | Purpose |
+|---|---|---|
+| Nine-slice border | Textures | Diamond-metal corners and edges using the `Dialog` layout |
+| `NineSlice.Bg` | Texture | Tiled `Interface\DialogFrame\UI-DialogBox-Background` parchment fill at `textureSubLevel="-5"` |
+
+The inheritance chain: `DialogBorderTemplate` → `DialogBorderNoCenterTemplate` → `NineSlicePanelTemplate` with `layoutType="Dialog"`. `DialogBorderTemplate` adds the tiled background fill on top of the bare border. If you want the border without the fill (to supply your own background), inherit `DialogBorderNoCenterTemplate` instead.
+
+This is the exact border used by `GameMenuFrame` (the ESC menu). Inside `MainMenuFrameTemplate`, it appears as:
+
+```xml
+<Frame parentKey="Border" inherits="DialogBorderTemplate"/>
+```
+
+The recipe uses it as a child frame with `setAllPoints="true"` — the same pattern the tooltip recipe uses with `NineSlicePanelTemplate`. Inheriting `NineSlicePanelTemplate` (or anything built on it) directly on an outer frame causes it to fill `UIParent`, because `NineSlicePanelMixin:OnLoad` calls `SetAllPoints()` to expand across the parent.
+
+### frameStrata and modal behavior
+
+`DIALOG` sits above `HIGH` and below `FULLSCREEN`. WoW uses it for system dialogs, confirmation popups, and the game menu — frames that appear over all game content and demand a response.
+
+`enableMouse="true"` and `toplevel="true"` together ensure the frame captures input rather than letting it fall through to the world below.
+
+WoW has no formal modal API that hard-locks all other interaction. `DIALOG` strata is the conventional signal: _this frame requires attention_. To fully block the UI behind it you would add a transparent full-screen click-sink frame in a lower strata, which is outside the scope of this recipe.
+
+### Live demo
+
+Install the addon in [Addons/ExampleFrameModalDialog__Vertex](./Addons/ExampleFrameModalDialog__Vertex/) and use `/ev4` to toggle the frame in-game.
+
+---
+
 ## Title frame
 
 A frame using `DefaultPanelTemplate` — standard WoW panel chrome with a title bar and no portrait slot.
@@ -218,7 +282,7 @@ The nine-slice layout (`ButtonFrameTemplateNoPortrait`) gives the standard metal
 
 ### Live demo
 
-Install the addon in [Addons/ExampleFrameTitleFrame__Vertex](./Addons/ExampleFrameTitleFrame__Vertex/) and use `/ev4` to toggle the frame in-game.
+Install the addon in [Addons/ExampleFrameTitleFrame__Vertex](./Addons/ExampleFrameTitleFrame__Vertex/) and use `/ev5` to toggle the frame in-game.
 
 ---
 
@@ -279,7 +343,7 @@ SetPortraitTexture(ExampleFrameIconPortrait:GetPortrait(), "player")
 
 ### Live demo
 
-Install the addon in [Addons/ExampleFrameIconPortrait__Vertex](./Addons/ExampleFrameIconPortrait__Vertex/) and use `/ev5` to toggle the frame in-game. The addon includes `vertex-icon.png` as the example portrait texture.
+Install the addon in [Addons/ExampleFrameIconPortrait__Vertex](./Addons/ExampleFrameIconPortrait__Vertex/) and use `/ev6` to toggle the frame in-game. The addon includes `vertex-icon.png` as the example portrait texture.
 
 ---
 
@@ -324,4 +388,4 @@ the only difference is the portrait source: `SetPortraitToUnit` instead of
 
 ### Live demo
 
-Install the addon in [Addons/ExampleFrameModelPortrait__Vertex](./Addons/ExampleFrameModelPortrait__Vertex/) and use `/ev6` to toggle the frame in-game.
+Install the addon in [Addons/ExampleFrameModelPortrait__Vertex](./Addons/ExampleFrameModelPortrait__Vertex/) and use `/ev7` to toggle the frame in-game.

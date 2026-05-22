@@ -1,0 +1,8 @@
+## Interface: 110205, 110207, 120000
+## Title: ExampleFrameModalDialog 2026 by Vertex /ev4
+## Notes: Cookbook recipe — modal dialog frame with slash command /ev4 toggle.
+## Version: 1.0.0
+## Category: Development Tools
+
+ExampleFrameModalDialog.xml
+_harness.lua

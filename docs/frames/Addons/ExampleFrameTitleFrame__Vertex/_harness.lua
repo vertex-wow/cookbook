@@ -1,10 +1,10 @@
--- HARNESS: Not part of the recipe. Registers /ev4 so you can toggle the frame
+-- HARNESS: Not part of the recipe. Registers /ev5 so you can toggle the frame
 -- in-game to see the example. Safe to delete when building your own addon.
 
 VertexExamples = VertexExamples or {}
 VertexExamples.ExampleFrameTitleFrame = ExampleFrameTitleFrame
 
-SLASH_EXAMPLEFRAMETITLEFRAME1 = "/ev4"
+SLASH_EXAMPLEFRAMETITLEFRAME1 = "/ev5"
 SlashCmdList["EXAMPLEFRAMETITLEFRAME"] = function()
     local f = ExampleFrameTitleFrame
     if f:IsShown() then

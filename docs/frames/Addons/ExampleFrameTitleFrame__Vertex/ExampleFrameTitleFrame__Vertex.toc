@@ -1,6 +1,6 @@
 ## Interface: 110205, 110207, 120000
-## Title: ExampleFrameTitleFrame 2026 by Vertex /ev4
-## Notes: Cookbook recipe — title frame with slash command /ev4 toggle.
+## Title: ExampleFrameTitleFrame 2026 by Vertex /ev5
+## Notes: Cookbook recipe — title frame with slash command /ev5 toggle.
 ## Version: 1.0.0
 ## Category: Development Tools
 
