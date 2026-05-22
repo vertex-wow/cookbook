@@ -1,0 +1,9 @@
+## Interface: 110205, 110207, 120000
+## Title: ExampleControlMoveableFrame 2026 by Vertex /ev9
+## Notes: Cookbook recipe — moveable icon portrait frame, slash command /ev9 toggle.
+## Version: 1.0.0
+## Category: Development Tools
+
+ExampleControlMoveableFrame.xml
+ExampleControlMoveableFrame.lua
+_harness.lua

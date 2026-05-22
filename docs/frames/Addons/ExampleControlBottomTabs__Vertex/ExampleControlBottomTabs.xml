@@ -1,0 +1,110 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+   https://raw.githubusercontent.com/Gethe/wow-ui-source/live/Interface/FrameXML/UI.xsd">
+
+  <Button name="ExampleControlBottomTabsTabTemplate"
+          inherits="PanelTabButtonTemplate"
+          mixin="ExampleControlBottomTabsMixin"
+          virtual="true">
+    <Scripts>
+      <OnShow method="OnShow"/>
+      <OnClick method="OnClick"/>
+    </Scripts>
+  </Button>
+
+  <Frame name="ExampleControlBottomTabs" parent="UIParent"
+         toplevel="true" enableMouse="true"
+         frameStrata="MEDIUM" hidden="true"
+         inherits="PortraitFrameTemplate"
+         mixin="ExampleControlBottomTabsFrameMixin">
+    <Size x="380" y="260"/>
+    <Anchors>
+      <Anchor point="CENTER"/>
+    </Anchors>
+    <Frames>
+
+      <Button name="$parentAlphaTab" parentKey="AlphaTab"
+              inherits="ExampleControlBottomTabsTabTemplate" text="Alpha">
+        <KeyValues>
+          <KeyValue key="frameName" value="AlphaPanel" type="string"/>
+        </KeyValues>
+        <Anchors>
+          <Anchor point="BOTTOMLEFT" x="20" y="-28"/>
+        </Anchors>
+      </Button>
+      <Button name="$parentBetaTab" parentKey="BetaTab"
+              inherits="ExampleControlBottomTabsTabTemplate" text="Beta">
+        <KeyValues>
+          <KeyValue key="frameName" value="BetaPanel" type="string"/>
+        </KeyValues>
+        <Anchors>
+          <Anchor point="LEFT" relativeKey="$parent.AlphaTab" relativePoint="RIGHT" x="-15" y="0"/>
+        </Anchors>
+      </Button>
+      <Button name="$parentGammaTab" parentKey="GammaTab"
+              inherits="ExampleControlBottomTabsTabTemplate" text="Gamma">
+        <KeyValues>
+          <KeyValue key="frameName" value="GammaPanel" type="string"/>
+        </KeyValues>
+        <Anchors>
+          <Anchor point="LEFT" relativeKey="$parent.BetaTab" relativePoint="RIGHT" x="-15" y="0"/>
+        </Anchors>
+      </Button>
+
+      <Frame parentKey="AlphaPanel" hidden="true">
+        <Anchors>
+          <Anchor point="TOPLEFT"/>
+          <Anchor point="BOTTOMRIGHT"/>
+        </Anchors>
+        <Layers>
+          <Layer level="OVERLAY">
+            <FontString inherits="GameFontNormal" text="Alpha">
+              <Anchors>
+                <Anchor point="CENTER"/>
+              </Anchors>
+            </FontString>
+          </Layer>
+        </Layers>
+      </Frame>
+
+      <Frame parentKey="BetaPanel" hidden="true">
+        <Anchors>
+          <Anchor point="TOPLEFT"/>
+          <Anchor point="BOTTOMRIGHT"/>
+        </Anchors>
+        <Layers>
+          <Layer level="OVERLAY">
+            <FontString inherits="GameFontNormal" text="Beta">
+              <Anchors>
+                <Anchor point="CENTER"/>
+              </Anchors>
+            </FontString>
+          </Layer>
+        </Layers>
+      </Frame>
+
+      <Frame parentKey="GammaPanel" hidden="true">
+        <Anchors>
+          <Anchor point="TOPLEFT"/>
+          <Anchor point="BOTTOMRIGHT"/>
+        </Anchors>
+        <Layers>
+          <Layer level="OVERLAY">
+            <FontString inherits="GameFontNormal" text="Gamma">
+              <Anchors>
+                <Anchor point="CENTER"/>
+              </Anchors>
+            </FontString>
+          </Layer>
+        </Layers>
+      </Frame>
+
+    </Frames>
+    <Scripts>
+      <OnLoad method="OnLoad"/>
+      <OnShow method="OnShow"/>
+    </Scripts>
+  </Frame>
+
+</Ui>

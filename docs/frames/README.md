@@ -6,6 +6,12 @@ XML frame recipes. No logic — just the frame definitions.
 |:---:|:---:|:---:|:---:|
 | <a href="#title-frame"><img src="./assets/example_frame_title.png" width="180"><br/>Title</a> | <a href="#icon-portrait"><img src="./assets/example_frame_icon_portrait.png" width="180"><br/>Icon Portrait</a> | <a href="#model-portrait"><img src="./assets/example_frame_model_portrait.png" width="180"><br/>Model Portrait</a> | |
 
+Also see [Frame Controls](#controls) section:
+- [Close button](#close-button)
+- [Moveable frame](#moveable-frame)
+- [Resizable frame](#resizable-frame)
+- [Bottom tabs](#bottom-tabs)
+
 ---
 
 ## Bare frame
@@ -390,3 +396,166 @@ the only difference is the portrait source: `SetPortraitToUnit` instead of
 ### Live demo
 
 Install the addon in [Addons/ExampleFrameModelPortrait__Vertex](./Addons/ExampleFrameModelPortrait__Vertex/) and use `/ev7` to toggle the frame in-game.
+
+---
+
+## Controls
+
+Common interactive controls. Examples are shown on specific frames but apply to any frame.
+
+---
+
+### Close button
+
+Adding a close button to a [Title frame](#title-frame). `DefaultPanelTemplate` does not include one — add it as a child `Button` inheriting `UIPanelCloseButtonDefaultAnchors`.
+
+Add inside the frame's `<Frames>` block:
+
+```xml
+<Button name="$parentCloseButton" inherits="UIPanelCloseButtonDefaultAnchors"/>
+```
+
+`UIPanelCloseButtonDefaultAnchors` is a Blizzard template that bundles the standard × button textures, an `OnClick` script that calls `Hide()` on the button's parent, and the canonical `TOPRIGHT x="1" y="0"` anchor — no additional Lua or anchor overrides required. This is the same template used by `HelpFrame`, `HeroTalentsSelectionDialog`, and every other `DefaultPanelTemplate` frame in the Blizzard UI that adds a close button.
+
+### Live demo
+
+Install the addon in [Addons/ExampleControlCloseButton__Vertex](./Addons/ExampleControlCloseButton__Vertex/) and use `/ev8` to toggle the frame in-game.
+
+---
+
+### Moveable frame
+
+Making a frame draggable, shown on a [Title frame](#title-frame). Three additions to any frame:
+
+**XML** — `movable="true"` on the `<Frame>` element, plus a `<Scripts>` block:
+
+```xml
+<Frame name="ExampleControlMoveableFrame" ...
+       movable="true">
+  ...
+  <Scripts>
+    <OnDragStart>self:StartMoving()</OnDragStart>
+    <OnDragStop>self:StopMovingOrSizing()</OnDragStop>
+  </Scripts>
+</Frame>
+```
+
+**Lua** — register which mouse button activates dragging:
+
+```lua
+ExampleControlMoveableFrame:RegisterForDrag("LeftButton")
+```
+
+`movable="true"` tells the engine the frame is allowed to move; without it `StartMoving` is a no-op. `RegisterForDrag` determines which button fires `OnDragStart`. `StopMovingOrSizing` also handles resize if the frame is ever made resizable.
+
+### Live demo
+
+Install the addon in [Addons/ExampleControlMoveableFrame__Vertex](./Addons/ExampleControlMoveableFrame__Vertex/) and use `/ev9` to toggle the frame in-game.
+
+---
+
+### Bottom tabs
+
+Adding `PanelTabButtonTemplate` tabs to an [Icon Portrait](#icon-portrait) frame. Three tabs switch between three content panels.
+
+Two mixins are needed: one for the tab buttons, one for the frame. Because the XML `mixin` attribute is resolved at parse time, **the Lua file must be listed before the XML in the TOC**.
+
+**XML** — a virtual tab template, then one `<Button>` per tab with a `frameName` key value, and a content `<Frame>` per panel. The first tab anchors `BOTTOMLEFT` on the frame; each subsequent tab chains `LEFT` off the previous:
+
+```xml
+<Button name="ExampleControlBottomTabsTabTemplate"
+        inherits="PanelTabButtonTemplate"
+        mixin="ExampleControlBottomTabsMixin"
+        virtual="true">
+  <Scripts>
+    <OnShow method="OnShow"/>
+    <OnClick method="OnClick"/>
+  </Scripts>
+</Button>
+
+<Frame name="ExampleControlBottomTabs" ...
+       inherits="PortraitFrameTemplate"
+       mixin="ExampleControlBottomTabsFrameMixin">
+  <Frames>
+    <Button name="$parentAlphaTab" parentKey="AlphaTab"
+            inherits="ExampleControlBottomTabsTabTemplate" text="Alpha">
+      <KeyValues>
+        <KeyValue key="frameName" value="AlphaPanel" type="string"/>
+      </KeyValues>
+      <Anchors>
+        <Anchor point="BOTTOMLEFT" x="20" y="-28"/>
+      </Anchors>
+    </Button>
+    <Button name="$parentBetaTab" parentKey="BetaTab"
+            inherits="ExampleControlBottomTabsTabTemplate" text="Beta">
+      <KeyValues>
+        <KeyValue key="frameName" value="BetaPanel" type="string"/>
+      </KeyValues>
+      <Anchors>
+        <Anchor point="LEFT" relativeKey="$parent.AlphaTab" relativePoint="RIGHT" x="-15" y="0"/>
+      </Anchors>
+    </Button>
+    ...
+  </Frames>
+  <Scripts>
+    <OnLoad method="OnLoad"/>
+    <OnShow method="OnShow"/>
+  </Scripts>
+</Frame>
+```
+
+**Lua**:
+
+```lua
+local TAB_PADDING = 20
+local MIN_TAB_WIDTH = 70
+local TAB_PANELS = { "AlphaPanel", "BetaPanel", "GammaPanel" }
+
+ExampleControlBottomTabsMixin = {}
+
+function ExampleControlBottomTabsMixin:OnShow()
+    PanelTemplates_TabResize(self, TAB_PADDING, nil, MIN_TAB_WIDTH)
+end
+
+function ExampleControlBottomTabsMixin:OnClick()
+    CallMethodOnNearestAncestor(self, "SelectTab", self.frameName)
+end
+
+ExampleControlBottomTabsFrameMixin = {}
+
+function ExampleControlBottomTabsFrameMixin:OnLoad()
+    self:SetTitle("Example Bottom Tabs")
+    ...
+    PanelTemplates_SetNumTabs(self, #TAB_PANELS)
+end
+
+function ExampleControlBottomTabsFrameMixin:OnShow()
+    self:SelectTab("AlphaPanel")
+end
+
+function ExampleControlBottomTabsFrameMixin:SelectTab(frameName)
+    for i, panelKey in ipairs(TAB_PANELS) do
+        if panelKey == frameName then
+            self[panelKey]:Show()
+            PanelTemplates_SetTab(self, i)
+        else
+            self[panelKey]:Hide()
+        end
+    end
+end
+```
+
+| | |
+|---|---|
+| `PanelTabButtonTemplate` | Provides the curved tab art and selected/unselected states |
+| `frameName` KeyValue | Lets `OnClick` pass the target panel name up without coupling the button to the frame |
+| `CallMethodOnNearestAncestor` | Walks the parent chain to call `SelectTab` — the tab button needs no direct reference to the outer frame |
+| `PanelTemplates_TabResize` | Called on `OnShow` to size the tab to its label text plus padding |
+| `PanelTemplates_SetNumTabs` | Tells the template how many tabs exist; required for `SetTab` to work |
+| `PanelTemplates_SetTab` | Sets the visual selected state on the correct tab |
+
+### Live demo
+
+Install the addon in [Addons/ExampleControlBottomTabs__Vertex](./Addons/ExampleControlBottomTabs__Vertex/) and use `/ev10` to toggle the frame in-game.
+
+> Maintained by the [Vertex WoW Community](https://github.com/vertex-wow) and [Vertex Industries](https://github.com/vertex-industries).
