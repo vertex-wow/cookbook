@@ -4,6 +4,15 @@
 VertexExamples = VertexExamples or {}
 VertexExamples.ExampleFrameTooltip = ExampleFrameTooltip
 
+-- QoL (harness only): makes the frame draggable and adds a close button so you
+-- can tile demos side-by-side and dismiss them without the slash command.
+-- Neither is part of the recipe — remove these lines along with the harness.
+ExampleFrameTooltip:SetMovable(true)
+ExampleFrameTooltip:RegisterForDrag("LeftButton")
+ExampleFrameTooltip:SetScript("OnDragStart", function(self) self:StartMoving() end)
+ExampleFrameTooltip:SetScript("OnDragStop", function(self) self:StopMovingOrSizing() end)
+CreateFrame("Button", nil, ExampleFrameTooltip, "UIPanelCloseButtonDefaultAnchors")
+
 SLASH_EXAMPLEFRAMETOOLTIP1 = "/ev3"
 SlashCmdList["EXAMPLEFRAMETOOLTIP"] = function()
     local f = ExampleFrameTooltip

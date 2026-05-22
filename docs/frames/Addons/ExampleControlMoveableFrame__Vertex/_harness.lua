@@ -4,6 +4,11 @@
 VertexExamples = VertexExamples or {}
 VertexExamples.ExampleControlMoveableFrame = ExampleControlMoveableFrame
 
+-- QoL (harness only): adds a close button so you can dismiss without the slash command.
+-- The recipe itself provides drag-to-move, so only the close button is added here.
+-- Not part of the recipe — remove this line along with the harness.
+CreateFrame("Button", nil, ExampleControlMoveableFrame, "UIPanelCloseButtonDefaultAnchors")
+
 SLASH_EXAMPLECONTROLMOVEABLEFRAME1 = "/ev9"
 SlashCmdList["EXAMPLECONTROLMOVEABLEFRAME"] = function()
     local f = ExampleControlMoveableFrame

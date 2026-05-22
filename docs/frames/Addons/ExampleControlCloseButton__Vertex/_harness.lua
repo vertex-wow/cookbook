@@ -4,6 +4,14 @@
 VertexExamples = VertexExamples or {}
 VertexExamples.ExampleControlCloseButton = ExampleControlCloseButton
 
+-- QoL (harness only): makes the frame draggable so you can tile demos side-by-side.
+-- The recipe itself provides the close button, so only drag is added here.
+-- Not part of the recipe — remove these lines along with the harness.
+ExampleControlCloseButton:SetMovable(true)
+ExampleControlCloseButton:RegisterForDrag("LeftButton")
+ExampleControlCloseButton:SetScript("OnDragStart", function(self) self:StartMoving() end)
+ExampleControlCloseButton:SetScript("OnDragStop", function(self) self:StopMovingOrSizing() end)
+
 SLASH_EXAMPLECONTROLCLOSEBUTTON1 = "/ev8"
 SlashCmdList["EXAMPLECONTROLCLOSEBUTTON"] = function()
     local f = ExampleControlCloseButton

@@ -2,6 +2,8 @@
 
 In-game toggle commands for cookbook example addons. Install all addons via `dev/install.sh`, then use `/reload` in-game.
 
+All demos support drag-to-move and have a close button as a harness convenience — these are not part of the recipe. See the `-- QoL (harness only)` block in each `_harness.lua`.
+
 `/evoff` hides all visible example frames at once.
 
 | # | Command | Addon | Recipe |

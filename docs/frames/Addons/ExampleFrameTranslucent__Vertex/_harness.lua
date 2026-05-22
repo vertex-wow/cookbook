@@ -4,6 +4,15 @@
 VertexExamples = VertexExamples or {}
 VertexExamples.ExampleFrameTranslucent = ExampleFrameTranslucent
 
+-- QoL (harness only): makes the frame draggable and adds a close button so you
+-- can tile demos side-by-side and dismiss them without the slash command.
+-- Neither is part of the recipe — remove these lines along with the harness.
+ExampleFrameTranslucent:SetMovable(true)
+ExampleFrameTranslucent:RegisterForDrag("LeftButton")
+ExampleFrameTranslucent:SetScript("OnDragStart", function(self) self:StartMoving() end)
+ExampleFrameTranslucent:SetScript("OnDragStop", function(self) self:StopMovingOrSizing() end)
+CreateFrame("Button", nil, ExampleFrameTranslucent, "UIPanelCloseButtonDefaultAnchors")
+
 SLASH_EXAMPLEFRAMETRANSLUCENT1 = "/ev2"
 SlashCmdList["EXAMPLEFRAMETRANSLUCENT"] = function()
     local f = ExampleFrameTranslucent

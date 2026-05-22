@@ -4,6 +4,14 @@
 VertexExamples = VertexExamples or {}
 VertexExamples.ExampleControlBottomTabs = ExampleControlBottomTabs
 
+-- QoL (harness only): makes the frame draggable so you can tile demos side-by-side.
+-- PortraitFrameTemplate already provides a close button, so only drag is added here.
+-- Not part of the recipe — remove these lines along with the harness.
+ExampleControlBottomTabs:SetMovable(true)
+ExampleControlBottomTabs:RegisterForDrag("LeftButton")
+ExampleControlBottomTabs:SetScript("OnDragStart", function(self) self:StartMoving() end)
+ExampleControlBottomTabs:SetScript("OnDragStop", function(self) self:StopMovingOrSizing() end)
+
 SLASH_EXAMPLECONTROLBOTTOMTABS1 = "/ev10"
 SlashCmdList["EXAMPLECONTROLBOTTOMTABS"] = function()
     local f = ExampleControlBottomTabs

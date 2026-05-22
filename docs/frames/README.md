@@ -12,6 +12,8 @@ Also see [Frame Controls](#controls) section:
 - [Resizable frame](#resizable-frame)
 - [Bottom tabs](#bottom-tabs)
 
+> **Live demo convenience:** Every live demo harness adds drag-to-move and a close button (where the recipe does not already provide them) so you can tile frames and dismiss them without the slash command. These are in the `-- QoL (harness only)` block in each `_harness.lua` and are not part of the recipe.
+
 ---
 
 ## Bare frame

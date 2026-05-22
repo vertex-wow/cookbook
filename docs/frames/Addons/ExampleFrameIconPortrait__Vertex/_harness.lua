@@ -4,6 +4,14 @@
 VertexExamples = VertexExamples or {}
 VertexExamples.ExampleFrameIconPortrait = ExampleFrameIconPortrait
 
+-- QoL (harness only): makes the frame draggable so you can tile demos side-by-side.
+-- PortraitFrameTemplate already provides a close button, so only drag is added here.
+-- Not part of the recipe — remove these lines along with the harness.
+ExampleFrameIconPortrait:SetMovable(true)
+ExampleFrameIconPortrait:RegisterForDrag("LeftButton")
+ExampleFrameIconPortrait:SetScript("OnDragStart", function(self) self:StartMoving() end)
+ExampleFrameIconPortrait:SetScript("OnDragStop", function(self) self:StopMovingOrSizing() end)
+
 SLASH_EXAMPLEFRAMEICONPORTRAIT1 = "/ev6"
 SlashCmdList["EXAMPLEFRAMEICONPORTRAIT"] = function()
     local f = ExampleFrameIconPortrait
