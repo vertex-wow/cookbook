@@ -16,9 +16,6 @@ ExampleControlBottomTabsFrameMixin = {}
 
 function ExampleControlBottomTabsFrameMixin:OnLoad()
     self:SetTitle("Example Bottom Tabs")
-    self:SetPortraitToAsset("Interface\\AddOns\\ExampleControlBottomTabs__Vertex\\vertex-icon")
-    self:GetPortrait():SetTexCoord(0, 1, 1, 0)
-    self:SetPortraitTextureSizeAndOffset(64, -6, 10)
     PanelTemplates_SetNumTabs(self, #TAB_PANELS)
 end
 

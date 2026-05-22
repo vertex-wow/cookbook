@@ -16,7 +16,7 @@
   <Frame name="ExampleControlBottomTabs" parent="UIParent"
          toplevel="true" enableMouse="true"
          frameStrata="MEDIUM" hidden="true"
-         inherits="PortraitFrameTemplate"
+         inherits="DefaultPanelTemplate"
          mixin="ExampleControlBottomTabsFrameMixin">
     <Size x="380" y="260"/>
     <Anchors>

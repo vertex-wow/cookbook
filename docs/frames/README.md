@@ -458,7 +458,7 @@ Install the addon in [Addons/ExampleControlMoveableFrame__Vertex](./Addons/Examp
 
 ### Bottom tabs
 
-Adding `PanelTabButtonTemplate` tabs to an [Icon Portrait](#icon-portrait) frame. Three tabs switch between three content panels.
+Adding `PanelTabButtonTemplate` tabs to a [Title Frame](#title-frame). Three tabs switch between three content panels.
 
 Two mixins are needed: one for the tab buttons, one for the frame. Because the XML `mixin` attribute is resolved at parse time, **the Lua file must be listed before the XML in the TOC**.
 
@@ -476,7 +476,7 @@ Two mixins are needed: one for the tab buttons, one for the frame. Because the X
 </Button>
 
 <Frame name="ExampleControlBottomTabs" ...
-       inherits="PortraitFrameTemplate"
+       inherits="DefaultPanelTemplate"
        mixin="ExampleControlBottomTabsFrameMixin">
   <Frames>
     <Button name="$parentAlphaTab" parentKey="AlphaTab"
@@ -527,7 +527,6 @@ ExampleControlBottomTabsFrameMixin = {}
 
 function ExampleControlBottomTabsFrameMixin:OnLoad()
     self:SetTitle("Example Bottom Tabs")
-    ...
     PanelTemplates_SetNumTabs(self, #TAB_PANELS)
 end
 
