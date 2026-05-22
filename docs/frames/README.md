@@ -1,9 +1,10 @@
 # Frames
 
-XML frame recipes. No Lua, no logic — just the frame definitions.
+XML frame recipes. No logic — just the frame definitions.
 
-| <a href="#bare-frame"><img src="./assets/example_frame_bare.png" width="140"><br/>Bare</a> | <a href="#translucent-frame"><img src="./assets/example_frame_translucent.png" width="140"><br/>Translucent</a> | <a href="#tooltip-frame"><img src="./assets/example_frame_tooltip.png" width="140"><br/>Tooltip</a> | <a href="#modal-dialog"><img src="./assets/example_frame_modal_dialog.png" width="140"><br/>Modal Dialog</a> | <a href="#title-frame"><img src="./assets/example_frame_title.png" width="140"><br/>Title</a> | <a href="#icon-portrait"><img src="./assets/example_frame_icon_portrait.png" width="140"><br/>Icon Portrait</a> | <a href="#model-portrait"><img src="./assets/example_frame_model_portrait.png" width="140"><br/>Model Portrait</a> |
-|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| <a href="#bare-frame"><img src="./assets/example_frame_bare.png" width="180"><br/>Bare</a> | <a href="#translucent-frame"><img src="./assets/example_frame_translucent.png" width="180"><br/>Translucent</a> | <a href="#tooltip-frame"><img src="./assets/example_frame_tooltip.png" width="180"><br/>Tooltip</a> | <a href="#modal-dialog"><img src="./assets/example_frame_modal_dialog.png" width="180"><br/>Modal Dialog</a> |
+|:---:|:---:|:---:|:---:|
+| <a href="#title-frame"><img src="./assets/example_frame_title.png" width="180"><br/>Title</a> | <a href="#icon-portrait"><img src="./assets/example_frame_icon_portrait.png" width="180"><br/>Icon Portrait</a> | <a href="#model-portrait"><img src="./assets/example_frame_model_portrait.png" width="180"><br/>Model Portrait</a> | |
 
 ---
 
