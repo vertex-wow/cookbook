@@ -15,7 +15,11 @@ Recipes are organized by topic.
 - [Icon portrait](docs/frames/README.md#icon-portrait) — `PortraitFrameTemplate` with a custom icon texture
 - [Model portrait](docs/frames/README.md#model-portrait) — `PortraitFrameTemplate` with the player's face via `SetPortraitToUnit`
 
-**[Controls](docs/frames/README.md#controls)** — close, moveable, resizable, border tabs
+**Frame behaviors** — [close](docs/frames/README.md#close-button), [moveable](docs/frames/README.md#moveable-frame), [resizable](docs/frames/README.md#resizable-frame)
+
+## [Controls](docs/controls/README.md)
+
+Button, dropdown, checkbox, radio button, tabs, scroll bar, table — interactive widgets for use inside frames.
 
 ## References
 
